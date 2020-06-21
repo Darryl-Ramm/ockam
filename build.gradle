@@ -118,7 +118,7 @@ task dockerBuilder {
 def hasDocker = {
   try {
     def process = 'docker'.execute()
-    process.waitForOrKill(10000)
+    process.waitFor()
     process.exitValue() == 0
   } catch(Exception ex) {
     false

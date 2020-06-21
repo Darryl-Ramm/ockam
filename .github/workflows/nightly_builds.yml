@@ -1,6 +1,11 @@
 name: Nightly Builds
 
 on: [push, pull_request]
+# on:
+#   repository_dispatch:
+#     types: run-nightly-builds
+#   schedule:
+#     - cron:  '0 1 * * *'
 
 jobs:
   build:
@@ -20,5 +25,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - id: Build
+      - name: Docker
+        run: docker info
+
+      - name: Build
         run: ./gradlew _build

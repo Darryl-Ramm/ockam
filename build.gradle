@@ -114,3 +114,22 @@ task dockerBuilder {
     }
   }
 }
+
+def hasDocker = {
+  try {
+    def process = 'docker'.execute()
+    process.waitForOrKill(1000)
+    process.exitValue() == 0
+  } catch(Exception ex) {
+    false
+  }
+}
+
+task _build {
+  println "Has Docker: ${hasDocker()}"
+
+  onlyIf { hasDocker() }
+  doLast {
+    println "Run Dockerized Build"
+  }
+}

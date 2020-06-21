@@ -1,10 +1,6 @@
 name: Nightly Builds
 
-on:
-  repository_dispatch:
-    types: run-nightly-builds
-  schedule:
-    - cron:  '0 1 * * *'
+on: [push, pull_request]
 
 jobs:
   build:
@@ -25,4 +21,4 @@ jobs:
         uses: actions/checkout@v2
 
       - id: Build
-        run: ./gradlew --version
+        run: ./gradlew _build
